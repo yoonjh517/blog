@@ -1,20 +1,32 @@
 # Sidebar navigation
 
-- label: 'Introduction'
-  link: '/'
-- label: 'Getting started'
-  link: '/getting-started'
+- label: "Introduction"
+  link: "/"
+- label: "Getting started"
+  link: "/getting-started"
+- label: MERN
+  items:
+    - label: "react basic"
+      link: "/mern/react-basic"
+    - label: "node.js & express basic"
+      link: "/mern/nodejs-and-express-basic"
+    - label: "crud mern app"
+      link: "/mern/crud-mern-app"
+    - label: "login boiler plate"
+      link: "/mern/login-boiler-plate"
 - label: Usage
   items:
-    - label: 'Creating docs'
-      link: '/usage/creating-docs'
-    - label: 'Navigation'
-      link: '/usage/navigation'
-    - label: 'Shadowing'
-      link: '/usage/shadowing'
+    - label: "Creating docs"
+      link: "/usage/creating-docs"
+    - label: "Navigation"
+      link: "/usage/navigation"
+    - label: "Shadowing"
+      link: "/usage/shadowing"
+    - label: "Sidebar test"
+      link: "/"
 - label: More
   items:
     - label: FAQ
       link: /faq
-    - label: 'Github'
+    - label: "Github"
       link: https://github.com/rocketseat/gatsby-themes

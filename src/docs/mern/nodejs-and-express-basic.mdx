@@ -1,0 +1,598 @@
+---
+title: "node.js and express basic"
+description: "node.js and express basic cheetsheet"
+image: ""
+disableTableOfContents: false
+---
+
+## SETTING
+
+```
+mkdir nodejs-express-server
+cd nodejs-express-server
+touch server.js
+code .
+npm init
+npm install express
+```
+
+```js title=server.js
+const express = require("express");
+const app = express();
+
+app.listen(8080, function () {
+  console.log("listening on 8080");
+});
+```
+
+```
+nodemon server.js
+```
+
+---
+
+## GET
+
+### Send data
+
+```js
+app.get("/react", (req, res) => {
+  res.send("This is a react page");
+});
+app.get("/vue", function (req, res) {
+  res.send("This is a vue page");
+});
+```
+
+[localhost:8080/react](localhost:8080/react)
+
+[localhost:8080/vue](localhost:8080/vue)
+
+---
+
+### Send file
+
+```js
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
+```
+
+```html title=index.html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h4>This is the landing page</h4>
+  </body>
+</html>
+```
+
+---
+
+### Use Bootstrap for simple design
+
+[Bootstrap starter template](https://getbootstrap.com/docs/4.4/getting-started/introduction/#starter-template)
+
+---
+
+## POST
+
+### Send write page
+
+```js title=server.js
+app.get("/write", (req, res) => {
+  res.sendFile(__dirname + "/write.html");
+});
+```
+
+```html title=write.html lineNumbers=true highlight={17,20,24}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <title>To do write page</title>
+  </head>
+  <body>
+    <h4 class="container mt-4"><strong>To do write page</strong></h4>
+
+    <div class="container mt-3">
+      <form action="/add" method="POST">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" name="title/>
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="text" class="form-control" name="date" />
+        </div>
+        <button type="submit" class="btn btn-outline-secondary">Submit</button>
+      </form>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+```
+
+---
+
+### Post request
+
+```js
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/add', (req, res){
+  console.log(req.body);
+  res.sond('data has sent')
+});
+```
+
+---
+
+## REST API
+
+#### API?
+
+Application Programming Interface
+The protocol between server and client
+
+#### REST?
+
+Representational State Transfer
+How to design API on web
+
+##### 1. Uniform Interface
+
+- One URL gets one data
+- Name URL simple and predictable
+
+##### 2. Client-server architecture
+
+- Do not mix client and server role
+- Do not ask client to get data from DB
+
+##### 3. Statelessness
+
+- All the requests should work independantly
+- Serve enough information with minimum amount of requests
+
+##### 4. Cacheability
+
+- The data for client's request should be cacheable
+- Announce it and ket client know about it
+
+##### 5. Layered System
+
+- It is able to have multiple layers or steps to deal with the requests
+
+##### 6. Code on Demand
+
+- Server can send a code as client's requset
+
+#### So how should we name URL?
+
+- Use noun instead of verb
+- Use predictable and consistant words
+- Use - instead of \_
+- Use / to indicate file structure
+- Do not use extension name _ex) .html .js_
+
+---
+
+## DB
+
+### Mongodb connection
+
+```
+npm install mongodb
+```
+
+```js
+const MongoClient = require("mongodb").MongoClient;
+
+MongoClient.connect("URL from mongodb", (err, client) => {
+  if (err) return consolg.log(err);
+
+  app.listen("8080", () => {
+    console.log("listening on 8080");
+  });
+});
+```
+
+---
+
+### Make db and collection
+
+database: todoapp
+
+collection: post
+
+```js highlight={4,7}
+var db;
+MongoClient.connect(
+  "URL from mongodb",
+  { useUnifiedTopology: true },
+  (err, client) => {
+    if (err) return console.log(err);
+    db = client.db("todoapp");
+
+    app.listen(8080, () => {
+      console.log("listening on 8080");
+    });
+  }
+);
+```
+
+### Add data on db
+
+```js
+app.post("/add", (req, res) => {
+  res.send("data has sent");
+  db.collection("post").insertOne(
+    { title: req.body.title, date: req.body.date },
+    () => {
+      console.log("data saved");
+    }
+  );
+});
+```
+
+Instead of res.send('message'), we can send status or redirection page
+
+## EJS
+
+### ejs setting
+
+```
+npm install ejs
+mkdir views
+touch list.ejs
+```
+
+```js title=server.js
+app.set("view engine", "ejs");
+```
+
+```html title=views/list.ejs
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h4>This is the list page</h4>
+  </body>
+</html>
+```
+
+#### ejs basic
+
+```js
+<h2><%= user.name %></h2>
+```
+
+```js
+<% if(user) %>
+<h2><%= user.name %></h2>
+<% } %>
+```
+
+### ejs rendering
+
+1. If client sends a GET request to /list
+1. Get data from mongodb
+1. Put data into ejs file and send it to the client
+
+```js title=server.js
+app.get("/list", (req, res) => {
+  db.collection("post")
+    .find()
+    .toArray((err, result) => {
+      console.log(result);
+      res.render("list.ejs", { posts: result });
+    });
+});
+```
+
+```html title=views/list.ejs
+// header...
+
+<body>
+  <% for ( var i = 0; i < posts.length; i++;) { %>
+  <h4><%= posts[i].title %></h4>
+  <p><%= posts[i].date %></p>
+  <% } %>
+</body>
+
+// closing tags...
+```
+
+---
+
+## Count
+
+### DB update
+
+```js
+db.collection('collection-name')
+.updateOne({name: data-name}, {data-setting}, (err, result) => {
+  // callback function
+})
+```
+
+#### data-setting examples
+
+{$set: {totalPosts: 100;}} : set totalPosts 100
+
+{$inc: {totalPosts: 5;}} : increase totalPosts 5
+
+### ID auto increment
+
+1. Make a collection named 'counter' on mongodb
+1. Set data **totalPosts: 0(int32), name: totalPostsCount**
+
+```js
+app.post("/add", (req, res) => {
+  db.collection("counter").findOne(
+    { name: "totalPostsCount" },
+    (err, result) => {
+      var totalPostsNumber = result.totalPost;
+
+      db.collection("post").insertOne(
+        {
+          _id: totalPostsNumber + 1,
+          title: req.body.title,
+          date: req.body.date,
+        },
+        (err, result) => {
+          db.collection("counter").updateOne(
+            { name: totalPostsCount },
+            { $inc: { totalPost: 1 } },
+            (err, result) => {
+              if (err) return console.log(err);
+              res.send("sent");
+            }
+          );
+        }
+      );
+    }
+  );
+});
+```
+
+---
+
+## DELETE
+
+### Delete request with AJAX
+
+```html title=views/list.ejs highlight={6}
+<ul class="list-group">
+  <% for ( var i = 0; i < posts.length; i++) { %>
+  <li class="list-group-item">
+    <h4>Todo: <%= posts[i].title %></h4>
+    <p>Date: <%= posts[i].date %></p>
+    <button class="delete" data-id="<%= posts[i]._id %>">DELETE</button>
+  </li>
+  <% } %>
+</ul>
+
+// Jquery for AJAX
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+  $(".delete").click(() => {
+    $ajax({
+      method: "DELETE",
+      url: "/delete",
+      data: { _id: e.target.dataset.id },
+    }).done((result) => {
+      console.log(result);
+    });
+  });
+</script>
+```
+
+```js title=server.js highlight={2}
+app.delete("/delete", (req, res) => {
+  req.body._id = parseInt(req.body._id);
+  db.collection("post").deleteOne(req.body, (err, result) => {
+    console.log("deleted");
+  });
+  res.send("deleted");
+});
+```
+
+### Server responses
+
+```js
+app.get('/url', (req, res)=>{
+  res.send('<p>some html</p>')
+  res.status(404).send('Sorry, we cannot find that!')
+  res.sendFile('/uploads/logo.png')
+  res.render('list.ejs', { data-to-put-ejs-file })
+  res.json(data.json)
+})
+```
+
+1. send simple word, paragraph or html
+1. send HTTP status codes
+1. send static file
+1. rendering files
+1. send data as json format
+
+### Renew page without reload
+
+```html title=list.ejs highlight={7-9}
+<script>
+  $(".delete").click(() => {
+    $.ajax({
+      method: "DELETE",
+      url: "/delete",
+      data: { _id: e.target.dataset.id },
+    }).done((result) => {
+      $(this).parent("li").fadeOut();
+    });
+  });
+</script>
+```
+
+## URL parameter
+
+### Detail page with URL parameter
+
+```js
+app.get("/detail/:id", (req, res) => {
+  db.collection("post").findOne(
+    { _id: parseInt(req.params.id) },
+    (err, result) => {
+      res.render("detail.ejs", { data: result });
+    }
+  );
+});
+```
+
+```html title=detail.ejs
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h4>This is the detail page</h4>
+    <h4>Title: <%= data.title %></h4>
+    <h4>Date: <%= data.date %></h4>
+  </body>
+</html>
+```
+
+## PUT
+
+### edit page setting
+
+```js
+app.get("/edit/:id", (req, res) => {
+  db.collection("post").findOne(
+    { _id: parseInt(req.params.id) },
+    (err, result) => {
+      res.render("edit.ejs", { post: result });
+    }
+  );
+});
+```
+
+```html title=views/edit.ejs
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <title>edit page</title>
+  </head>
+  <body>
+    <h4 class="container mt-4"><strong>edit page</strong></h4>
+
+    <div class="container mt-3">
+      <form action="/add" method="POST">
+        <div class="form-group">
+          <label>Title</label>
+          <input
+            value="<%= post.title %>"
+            type="text"
+            class="form-control"
+            name="title"
+          />
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input
+            value="<%= post.date %>"
+            type="text"
+            class="form-control"
+            name="date"
+          />
+        </div>
+        <button type="submit" class="btn btn-outline-secondary">Submit</button>
+      </form>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+```
+
+### method-override
+
+```
+npm install method-override
+```
+
+```js
+const methodOverride = require("method-override");
+app.use(methodOverride("_method"));
+
+app.put("/edit", (req, res) => {
+  db.collection("post").updateOne(
+    { _id: parseInt(req.body.id) },
+    { $set: { title: req.body.title, date: req.body.date } },
+    () => {
+      console.log("updated");
+      res.redirect("/list");
+    }
+  );
+});
+```
+
+```html title=views/edit.ejs
+<form action="/edit?_method=PUT" method="POST">
+  <input value="<%= post._id %>" name="id" style="display: none" />
+  <!-- same code -->
+</form>
+```

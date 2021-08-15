@@ -1,0 +1,374 @@
+---
+title: "crud mern app"
+description: "Create a todo app with mern stack"
+image: ""
+disableTableOfContents: false
+---
+
+## SETTING
+
+open terminal
+
+```
+npx create-react-app crud-mern-app
+cd crud-mern-app
+touch server.js
+npm install express mongoose cors axios
+```
+
+```javascript title=server.js
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+const cors = require("cors");
+const port = 3001;
+
+// connect to mongodb
+
+// data schema
+
+// data model
+
+// read route
+
+// create route
+
+// delete
+
+// update route
+
+app.listen(port, function () {
+  console.log("Express is running");
+});
+```
+
+```json title=package.json
+
+"proxy": "http://localhost: 3001"
+```
+
+nodemon server.js
+
+---
+
+### Mongodb connection
+
+```js
+// connect to mongodb
+mongoose.connect("mongodb-url");
+```
+
+change password, database part
+
+---
+
+### Data schema
+
+```js
+// data schema
+const itemSchema = {
+  title: String,
+  description: String,
+};
+```
+
+---
+
+### Data model
+
+```js
+// data model
+const Item = mongoose.model("Item", itemSchema);
+```
+
+---
+
+## READ REQUEST
+
+### Read route
+
+```js
+// read route
+app.get("/items", (req, res) => {
+  Item.find()
+    .then((items) => res.json(items))
+    .catch((err) => res.status(400).json("error: " + err));
+});
+```
+
+---
+
+### Save data from get request into state
+
+```jsx
+import { useState, useEffect } from "react";
+
+const [items, setItems] = useState([
+  {
+    title: "",
+    description: "",
+    _id: "",
+  },
+]);
+
+useEffect(() => {
+  fetch("/items")
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .then((jsonRes) => setItems(jsonRes))
+    .catch((err) => console.log(err));
+}, [items]);
+```
+
+---
+
+### Use map function for items state
+
+```jsx
+// below add item button tag
+{
+  items.map((item) => {
+    return (
+      <div key={item._id}>
+        <p>{item.title}</p>
+        <p>{item.description}</p>
+        <button>DELETE</button>
+        <button>UPDATE</button>
+      </div>
+    );
+  });
+}
+```
+
+---
+
+## POST REQUEST
+
+### Input setting
+
+```
+npm install axios
+```
+
+```jsx title=App.js
+import { useState } from "react";
+import axios from "axios";
+
+function App() {
+  const [item, setItem] = useState({ title: "", description: "" });
+
+  return (
+    <div className="App">
+      <div className="main">
+        <input
+          onChange={handleChange}
+          name="title"
+          value={item.title}
+          placeholder="title"
+        ></input>
+        <input
+          onChange={handleChange}
+          name="description"
+          value={item.description}
+          placeholder="description"
+        ></input>
+        <button onClick={addItem}>ADD ITEM</button>
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+### Function for input
+
+```jsx
+function handleChange(e) {
+  const { name, value } = e.target;
+  setItem((prevInput) => {
+    return {
+      ...prevInput,
+      [name]: value,
+    };
+  });
+}
+```
+
+---
+
+### Function for add button & axios post request
+
+```jsx
+function addItem(e) {
+  e.preventDefault();
+  const newIten = {
+    title: item.title,
+    description: item.description,
+  };
+
+  axios.post("/newitem", newItem);
+  console.log(newItem);
+  aler("item added");
+
+  setItem({
+    title: "",
+    description: "",
+  });
+}
+```
+
+---
+
+### Create route
+
+```js
+// config
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// create route
+app.post("/newitem", (req, res) => {
+  const newItem = new Item({
+    title: req.body.title,
+    description: req.body.description,
+  });
+  newItem
+    .save()
+    .then((item) => console.log(item))
+    .catch((err) => res.status(400).json("Error " + err));
+});
+```
+
+Check if post request is working
+
+## DELETE REQUEST
+
+### Delete function
+
+```jsx
+function deleteItem(id) {
+  axios.delete("/delete" + id);
+  alert("item deleted");
+  console.log(`Deleted item with id ${id}`);
+}
+
+<button onClick={() => deleteItem(item._id)}>DELETE</button>;
+```
+
+---
+
+### Delete route
+
+```js
+// delete route
+app.delete("/delete/:id", (req, res) => {
+  const id = req.params.id;
+
+  Item.findByIdAndDelete({ _id: id }, (req, res, err) => {
+    if (!err) {
+      console.log("item deleted");
+    } else {
+      console.log(err);
+    }
+  });
+});
+```
+
+---
+
+## UPDATE REQUEST
+
+### Update menu screen
+
+```jsx
+const [isPut, setIsPut] = useState(false);
+
+function openUpdate(id){
+  setIsPut(true);
+}
+
+{!isPut
+?
+(
+<div className="main">
+  {/* same as before */}
+  <button onClick={()=> openUpdate(item._id)}>UPDATE</button>
+)
+:
+(
+  <div className="main">
+    <input onChange={handleUpdate} value={updatedItem.title} name="title" placeholder="title"></input>
+    <input onChange={handleUpdate} value={updatedItem.description} name="description" placeholder="description"></input>
+    <button onClick={()=> updatedItem(updatedItem.id)}>UPDATE ITEM</button>
+  </div>
+)
+}
+```
+
+---
+
+### Update functions setting
+
+```jsx
+const [updatedItem, setUpdatedItem] = useState({
+  title: "",
+  description: "",
+  id: "",
+});
+
+function openUpdate(id) {
+  setIsPut(true);
+  setUpdatedItem((prevInput) => {
+    return {
+      ...prevInput,
+      id: id,
+    };
+  });
+}
+
+function updateItem(id) {
+  axios.put("/put" + id, updatedItem);
+  alert("item updated");
+  console.log(`item with id ${id} is updated`);
+}
+
+function handleUpdate(e) {
+  const { name, value } = e.target;
+  setUpdatedItem((prevInput) => {
+    return {
+      ...prevInput,
+      [name]: value,
+    };
+  });
+  console.log("updated");
+}
+```
+
+---
+
+### Update route
+
+```js
+// update route
+app.put("/put/:id", (req, res) => {
+  const updatedItem = {
+    title: req.body.title,
+    description: req.body.description,
+  };
+
+  Item.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $set: updatedItem },
+    (req, res, err) => {
+      if (!err) {
+        console.log("item updated");
+      } else console.log(err);
+    }
+  );
+});
+```
