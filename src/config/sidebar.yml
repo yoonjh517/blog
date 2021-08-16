@@ -7,11 +7,9 @@
 - label: TEST
   items:
     - label: "test"
-      link: "/test/login-boiler-plate"
+      link: "/test/test"
 - label: MERN
   items:
-    - label: "test"
-      link: "/mern/login-boiler-plate"
     - label: "react basic"
       link: "/mern/react-basic"
     - label: "node.js & express basic"
