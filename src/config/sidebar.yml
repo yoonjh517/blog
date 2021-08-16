@@ -4,6 +4,10 @@
   link: "/"
 - label: "Getting started"
   link: "/getting-started"
+- label: BLOG
+  items:
+    - label: "gatsby deploy"
+      link: "/blog/gatsby-deploy"
 - label: MERN
   items:
     - label: "react basic"
