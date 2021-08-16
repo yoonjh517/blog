@@ -11,7 +11,7 @@
 - label: MERN
   items:
     - label: "test"
-      link: "/test/lonin-boiler-plage"
+      link: "/mern/lonin-boiler-plage"
     - label: "react basic"
       link: "/mern/react-basic"
     - label: "node.js & express basic"
