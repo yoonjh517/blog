@@ -18,6 +18,8 @@
       link: "/mern/gatsby-deploy"
 - label: Usage
   items:
+    - label: "gatsby deploy"
+      link: "/mern/gatsby-deploy"
     - label: "Creating docs"
       link: "/usage/creating-docs"
     - label: "Navigation"
