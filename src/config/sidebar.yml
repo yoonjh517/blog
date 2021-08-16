@@ -21,7 +21,9 @@
     - label: "gatsby deploy"
       link: "/mern/gatsby-deploy"
     - label: "gatsby deploy"
-    link: "/mern/gatsby-deploy"
+      link: "/mern/gatsby-deploy"
+    - label: "gatsby deploy"
+      link: "/mern/gatsby-deploy"
 - label: Usage
   items:
     - label: "gatsby deploy"
