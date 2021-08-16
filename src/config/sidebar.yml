@@ -7,11 +7,11 @@
 - label: TEST
   items:
     - label: "test"
-      link: "/test/lonin-boiler-plage"
+      link: "/test/login-boiler-plate"
 - label: MERN
   items:
     - label: "test"
-      link: "/mern/lonin-boiler-plage"
+      link: "/mern/login-boiler-plate"
     - label: "react basic"
       link: "/mern/react-basic"
     - label: "node.js & express basic"
