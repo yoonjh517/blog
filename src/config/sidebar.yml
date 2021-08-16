@@ -4,12 +4,14 @@
   link: "/"
 - label: "Getting started"
   link: "/getting-started"
-- label: BLOG
+- label: TEST
   items:
-    - label: "gatsby deploy"
-      link: "/blog/gatsby-deploy"
+    - label: "test"
+      link: "/test/lonin-boiler-plage"
 - label: MERN
   items:
+    - label: "test"
+      link: "/test/lonin-boiler-plage"
     - label: "react basic"
       link: "/mern/react-basic"
     - label: "node.js & express basic"
@@ -18,10 +20,6 @@
       link: "/mern/crud-mern-app"
     - label: "login boiler plate"
       link: "/mern/login-boiler-plate"
-    - label: "gatsby deploy"
-      link: "/mern/gatsby-deploy"
-    - label: "gatsby deploy"
-      link: "/mern/gatsby-deploy"
     - label: "gatsby deploy"
       link: "/mern/gatsby-deploy"
 - label: Usage
