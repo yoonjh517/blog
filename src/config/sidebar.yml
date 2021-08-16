@@ -19,7 +19,7 @@
 - label: Usage
   items:
     - label: "gatsby deploy"
-      link: "/mern/gatsby-deploy"
+      link: "/usage/gatsby-deploy"
     - label: "Creating docs"
       link: "/usage/creating-docs"
     - label: "Navigation"
