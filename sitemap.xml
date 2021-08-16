@@ -13,4 +13,5 @@
 <url> <loc>https://rocketdocs.netlify.app/blog/mern/nodejs-and-express-basic</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://rocketdocs.netlify.app/blog/mern/react-basic</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://rocketdocs.netlify.app/blog/usage/gatsby-deploy</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://rocketdocs.netlify.app/blog/blog/gatsby-deploy</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
