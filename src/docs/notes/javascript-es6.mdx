@@ -1,0 +1,291 @@
+---
+title: "JavaScript ES6"
+description: "JavaScript ES5, ES6 basics"
+image: ""
+disableTableOfContents: false
+---
+
+## Arrow function
+
+### this
+
+this keyword has more than one meaning
+
+#### Inside of a method, this means the object which includes the method
+
+```js
+var myObject = {
+  data: {
+    myMethod: function () {
+      console.log(this);
+    },
+  },
+};
+```
+
+this means myObject
+
+#### Inside of a constructor, this means new object
+
+```js
+function myConstructor() {
+  this.name = "kim";
+}
+var myObject = new myConstructor();
+```
+
+#### Inside of an eventlistener, this means e.currentTarget
+
+```js
+document.getElementById("button").addEventListener("click", function (e) {
+  console.log(this);
+});
+```
+
+#### Inside of an arrow function, the meaning of this doesn't change by objects
+
+```js highlight={2-3}
+var myObject = {
+  myFunction: function () {
+    console.log(this);
+  },
+};
+```
+
+this means myObject
+
+```js highlight={2-3}
+var myObject = {
+  myFunction: () => {
+    console.log(this);
+  },
+};
+```
+
+this means window(outside of myObject)
+
+## var, let, const
+
+| variables | scope          | update | re-declared |
+| --------- | -------------- | ------ | ----------- |
+| var       | function       | yes    | yes         |
+| let       | curly brackets | yes    | no          |
+| const     | curly brackets | no     | no          |
+
+## Template literals
+
+```js
+var age = 20;
+`I am ${} years old`
+```
+
+## Spread Operator
+
+#### to combine arrays
+
+```js
+var a = [1, 2, 3];
+var b = [4, 5];
+var c = [...a, ...b];
+```
+
+#### to copy arrays
+
+```js highlight={2}
+var a = [1, 2, 3];
+var b = a;
+```
+
+when 'a' value changes, 'b' value changes too
+
+```js highlight={2}
+var a = [1, 2, 3];
+var b = [...a];
+```
+
+when 'a' value changes, 'b' value doesn't change
+
+## OOP
+
+### constructor
+
+copy objects (hard coding)
+
+```js
+var student1 = { name: "Sam", age: 20 };
+var student2 = { name: "Kim", age: 30 };
+...
+```
+
+copy objects (using constructor)
+
+```js
+function myConstructor(name, age) {
+  this.name = name;
+  this.age = age;
+  this.sayHi = function () {
+    console.log(`hello my name is ${this.name} and I'm ${this.age} years old`);
+  };
+}
+var student3 = new myConstructor("Tom", 15);
+var student4 = new myConstructor("Roy", 25);
+...
+```
+
+### prototype
+
+secret inheritance
+
+child object can use parent object's property
+
+```js
+function myConstructor() {
+  this.name = "Kim";
+  this.age = 15;
+}
+
+myConstructor.prototype.gender = "femail";
+
+var student1 = new myConstructor();
+
+console.log(student1.gender); // femail
+```
+
+### class
+
+```js
+class parent {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  // add prototype
+  sayHi() {
+    console.log("Hi");
+  }
+  sayBye() {
+    console.log("Bye");
+  }
+}
+
+var child = new parent("J", "30");
+```
+
+### extend & super
+
+```js
+class grandParent {
+  constructor(name) {
+    this.firstName = name;
+    this.lastName = "yoon";
+  }
+}
+```
+
+```js highlight={1,3}
+class parent extends grandParent {
+  constructor(name) {
+    super(name);
+    this.age = 50;
+  }
+}
+
+var me = new parent("J");
+console.log(me); // {firstName: 'J', lastName: 'yoon', age: 50}
+```
+
+## import & export
+
+#### export default
+
+```js title="library.js"
+var a = 10;
+
+export default a;
+```
+
+```js
+import a from "library.js";
+```
+
+#### export {a, b}
+
+```js title="library.js"
+var a = 10;
+var b = 20;
+
+export { a, b };
+```
+
+```js
+import { a, b } from "library.js";
+```
+
+#### export default & export {a, b}
+
+```js title="library.js"
+var a = 10;
+var b = 20;
+var c = 30;
+
+export default a;
+export { b, c };
+```
+
+```js
+import a, { b, c } from "library.js";
+```
+
+#### change variable name
+
+```js title="library.js"
+var a = 10;
+var b = 20;
+var c = 30;
+
+export default a;
+export { b, c };
+```
+
+```js
+import a as A, {b as B, c as C} from 'library.js'
+```
+
+#### use \* for everything
+
+```js title="library.js"
+var a = 10;
+var b = 20;
+var c = 30;
+var d = 40;
+var e = 50;
+...
+var z = 260;
+
+export default a;
+export {b, c};
+```
+
+```js
+import a, {* as BtoZ} from 'library.js'
+
+console.log(a);
+console.log(BtoZ.b);
+console.log(BtoZ.z);
+```
+
+#### require, module export (older version)
+
+```js title="old-library.js"
+module.exports.a = 10;
+```
+
+```js
+var a = require("/library.js");
+```
+
+## async & sync
+
+### promise
+
+### async & await

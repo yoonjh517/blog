@@ -24,6 +24,8 @@
       link: "/notes/react-basic"
     - label: "Node.js & Express basic"
       link: "/notes/nodejs-and-express-basic"
+    - label: "ES6 Basic"
+      link: "/notes/javascript-es6"
     - label: "Git & Github"
       link: "/notes/git-and-github"
     - label: "Gatsby.js deploy"
