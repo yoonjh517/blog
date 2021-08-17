@@ -2,24 +2,36 @@
 
 - label: "Introduction"
   link: "/"
-- label: "Getting started"
-  link: "/getting-started"
-- label: TEST
+# - label: "Getting started"
+#   link: "/getting-started"
+- label: Projects
   items:
-    - label: "test"
-      link: "/test/test"
-- label: MERN
+    - label: "React Movie App"
+      link: "/projects/react-movie-app"
+    - label: "Login Boiler Plage"
+      link: "/projects/login-boiler-plate"
+    - label: "React To Do App"
+      link: "/projects/react-to-do-app"
+    - label: "Vue Realestate App"
+      link: "/projects/vue-realestate-app"
+    - label: "WordPress Theme"
+      link: "/projects/wordpress-theme"
+    - label: "Northside Are Gallery"
+      link: "/projects/northside-art-gallery"
+- label: Notes
   items:
-    - label: "react basic"
-      link: "/mern/react-basic"
-    - label: "node.js & express basic"
-      link: "/mern/nodejs-and-express-basic"
-    - label: "crud mern app"
-      link: "/mern/crud-mern-app"
-    - label: "login boiler plate"
-      link: "/mern/login-boiler-plate"
-    - label: "gatsby deploy"
-      link: "/mern/gatsby-deploy"
+    - label: "React Basic"
+      link: "/notes/react-basic"
+    - label: "Node.js & Express basic"
+      link: "/notes/nodejs-and-express-basic"
+    - label: "Git & Github"
+      link: "/notes/git-and-github"
+    - label: "Gatsby.js deploy"
+      link: "/notes/gatsby-deploy"
+    - label: "Login Boiler Plate"
+      link: "/notes/login-boiler-plate"
+    - label: "CRUD MERN App"
+      link: "/notes/crud-mern-app"
 - label: Usage
   items:
     - label: "Creating docs"
@@ -32,7 +44,5 @@
       link: "/"
 - label: More
   items:
-    - label: FAQ
-      link: /faq
     - label: "Github"
       link: https://github.com/rocketseat/gatsby-themes
