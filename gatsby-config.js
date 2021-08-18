@@ -1,9 +1,9 @@
 module.exports = {
   pathPrefix: "/blog",
   siteMetadata: {
-    siteTitle: `Rocket Docs`,
-    defaultTitle: `Rocket Docs`,
-    siteTitleShort: `Rocket Docs`,
+    siteTitle: `Jeonghwan's blog`,
+    defaultTitle: `Jeonghwan's blog`,
+    siteTitleShort: `Jeonghwan's blog`,
     siteDescription: `Out of the box Gatsby Theme for creating documentation websites easily and quickly`,
     siteUrl: `https://rocketdocs.netlify.app`,
     siteAuthor: `@rocketseat`,
