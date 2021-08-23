@@ -4,3 +4,164 @@ description: "git and github basic command"
 image: ""
 disableTableOfContents: false
 ---
+
+## Local Storage
+
+## Working directory
+
+### init
+
+```bash
+git init
+```
+
+Change directory into local git storage
+and now we can use git command
+
+#### cancel git init
+
+```bash
+git rm -r .git
+```
+
+### state
+
+```bash
+git state
+```
+
+Check which files are being tracked
+
+### add
+
+```bash
+git add <filename>
+# add selected files
+git add .
+# add all files
+```
+
+send all files or selected files to the staging area
+
+## Staging area
+
+### commit
+
+```bash
+git commit -m "commit message"
+```
+
+Commit and send files on staging area to HEAD
+
+#### return to previous commit version
+
+```bash
+git log
+# check git log
+git reset <commit code> --hard
+```
+
+## HEAD
+
+### remote
+
+#### add
+
+```bash
+git remote add origin <github repository url>
+```
+
+connect local storage and remote storage
+
+#### check
+
+```bash
+git remote -v
+```
+
+check if local storage and remote storage are connected
+
+#### delete
+
+```bash
+git remote remove origin
+```
+
+disconnect local storage and remote storage
+
+### branch
+
+#### new branch
+
+```bash
+git branch <new branch name>
+```
+
+#### swap branch
+
+```bash
+git checkout <branch name>
+# move to another branch
+git checkout -b <new branch name>
+# make a new branch and move to the new branch
+```
+
+#### delete branch
+
+```bash
+git branch -d <local brach name>
+# delete branch locally
+git branch -D <local branch name>
+# forced delete
+git push origin --delete <remote branch name>
+# delete branch remotely
+```
+
+#### git merge
+
+```bash
+# for example, if you want to merge branch-2 into branch-1
+git checkout <branch>
+# move to branch-1
+git merge <branch>
+# merge branch-2 into branch-1, there will be only branch-1
+```
+
+### push
+
+```bash
+git push origin <branch name>
+```
+
+#### delete
+
+```bash
+git log
+# check commit log, enter q for escaping
+git reset HEAD^
+# delete the latest commit
+git reset HEAD~2
+# delete 2 recent commits
+git push -f origin
+# renew github repository commit log
+```
+
+## Remote Storage
+
+## Github repository
+
+### clone
+
+```bash
+git clone
+```
+
+copy and paste
+
+### pull
+
+```bash
+git pull
+```
+
+overwrite
