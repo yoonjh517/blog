@@ -1,6 +1,6 @@
 # Sidebar navigation
 
-- label: "Introduction"
+- label: "About Me"
   link: "/"
 # - label: "Getting started"
 #   link: "/getting-started"
@@ -34,17 +34,17 @@
       link: "/notes/login-boiler-plate"
     - label: "CRUD MERN App"
       link: "/notes/crud-mern-app"
-- label: Usage
-  items:
-    - label: "Creating docs"
-      link: "/usage/creating-docs"
-    - label: "Navigation"
-      link: "/usage/navigation"
-    - label: "Shadowing"
-      link: "/usage/shadowing"
-    - label: "Sidebar test"
-      link: "/"
+# - label: Usage
+#   items:
+#     - label: "Creating docs"
+#       link: "/usage/creating-docs"
+#     - label: "Navigation"
+#       link: "/usage/navigation"
+#     - label: "Shadowing"
+#       link: "/usage/shadowing"
+#     - label: "Sidebar test"
+#       link: "/"
 - label: More
   items:
     - label: "Github"
-      link: https://github.com/rocketseat/gatsby-themes
+      link: https://github.com/yoonjh517
